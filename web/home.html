@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Reactive Sphere</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Same styles as provided */
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            background: radial-gradient(circle, #1a1a1a, #000); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            position: relative;
+        }
+        canvas { display: block; }
+        .error-message {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: none;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        .info-panel {
+            position: fixed;
+            bottom: 30px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        #leftPanel {
+            left: 30px;
+            text-align: left;
+        }
+        #rightPanel {
+            right: 30px;
+            text-align: right;
+        }
+        #clock {
+            font-size: 3.2em;
+            color: #00ffff;
+            text-shadow: 
+                0 0 10px rgba(0, 255, 255, 0.8),
+                0 0 20px rgba(0, 255, 255, 0.6),
+                0 0 30px rgba(0, 255, 255, 0.4);
+        }
+        #date {
+            font-size: 1.3em;
+            color: rgba(0, 255, 255, 0.8);
+            margin-top: 8px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+        }
+        #factBox {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 60px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            text-align: left;
+            width: 50vh;
+        }
+        .fact-text {
+            color: #00ffff;
+            font-size: 1.1em;
+            line-height: 1.4;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.6);
+        }
+        .fact-source {
+            color: rgba(0, 255, 255, 0.6);
+            font-size: 0.9em;
+            margin-top: 8px;
+            display: block;
+            text-align: right;
+        }
+        /* Style for JSON display */
+        #jsonDisplay {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+        }
+        /* Custom styles for bold and italics */
+        .user-content {
+            font-weight: bold;
+        }
+        .assistant-content {
+            font-style: italic;
+        }
+        /* Weather Display */
+        #weatherDisplay {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        #weatherIcon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-message" id="errorMessage">Microphone access required</div>
+    <div id="leftPanel" class="info-panel">
+        <div id="clock">12:00:00</div>
+        <div id="date">Monday, January 01</div>
+    </div>
+    <div id="rightPanel" class="info-panel">
+        <div id="factBox">
+            <div class="fact-text">Loading interesting fact...</div>
+            <div class="fact-source">Source: Open Trivia DB</div>
+        </div>
+    </div>
+    <!-- JSON Display Section -->
+    <div id="jsonDisplay">
+        <h3>Last 5 Conversations</h3>
+        <ul id="conversationList"></ul>
+    </div>
+    <!-- Weather Display Section -->
+    <div id="weatherDisplay">
+        <div id="weatherIcon">☀️</div>
+        <div id="weatherInfo">Loading weather...</div>
+    <div id="weather">IIT Kanpur</div>
+    </div>
+    <script>
+        // Clock functionality
+        function updateClock() {
+            const now = new Date();
+            const clock = document.getElementById('clock');
+            const date = document.getElementById('date');
+            // Time formatting
+            let hours = now.getHours();
+            hours = hours % 12 || 12;
+            hours = hours.toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            clock.textContent = `${hours}:${minutes}:${seconds}`;
+            // Date formatting
+            const options = { 
+                weekday: 'long', 
+                month: 'long', 
+                day: 'numeric',
+                timeZoneName: 'short' 
+            };
+            date.textContent = now.toLocaleDateString('en-US', options)
+                                  .replace(/( \([^)]+\))/, ''); // Remove timezone abbreviation
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Fetch weather data from Open-Meteo API
+        async function fetchWeather() {
+            const latitude = 26.4499; // Example: Kanpur latitude
+            const longitude = 80.3319; // Example: Kanpur longitude
+            try {
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
+                if (!response.ok) {
+                    throw new Error(`Failed to load weather: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                const currentWeather = data.current_weather;
+                const temperature = currentWeather.temperature;
+                const weatherCode = currentWeather.weathercode;
+
+                // Update weather info
+                const weatherInfo = document.getElementById('weatherInfo');
+                weatherInfo.textContent = `Temperature: ${temperature}°C`;
+
+
+                // Update weather icon based on time of day and weather code
+                const weatherIcon = document.getElementById('weatherIcon');
+                const hours = new Date().getHours();
+                const isDayTime = hours >= 6 && hours < 18;
+
+                // Map weather codes to icons (simplified)
+                if (isDayTime) {
+                    weatherIcon.textContent = weatherCode === 0 ? "☀️" : "☁️"; // Sunny or Cloudy
+                } else {
+                    weatherIcon.textContent = "🌙"; // Moon for night
+                }
+            } catch (error) {
+                console.error('Error fetching weather:', error);
+            }
+        }
+
+        // Initial fetch and set interval
+        fetchWeather();
+        setInterval(fetchWeather, 300000); // Refresh every 5 minutes
+
+        // Fact fetching with enhanced error handling
+        async function fetchFact() {
+            const factBox = document.querySelector('.fact-text');
+            const source = document.querySelector('.fact-source');
+            try {
+                const response = await fetch('https://opentdb.com/api.php?amount=1&type=boolean'); // Using Open Trivia DB
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                if (!data || !data.results || !data.results.length) {
+                    throw new Error('Invalid API response format');
+                }
+                const fact = data.results[0].question; // Get the trivia question/fact
+                factBox.textContent = fact;
+                source.textContent = 'Source: Open Trivia DB';
+            } catch (error) {
+                factBox.textContent = 'Error loading fact';
+                source.style.color = '#ff4444';
+                console.error('Fact fetch error:', error);
+            }
+        }
+        // Initial fetch and set interval
+        fetchFact();
+        setInterval(fetchFact, 10000);
+
+        // Three.js setup
+        let scene = new THREE.Scene();
+        let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        let renderer = new THREE.WebGLRenderer({ 
+            alpha: true, 
+            antialias: true,
+            powerPreference: 'high-performance'
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Enhanced Shader Material
+        let geometry = new THREE.SphereGeometry(1.2, 64, 64);
+        let material = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0.0 },
+                audioData: { value: 0.0 }
+            },
+            vertexShader: `
+                varying vec3 vNormal;
+                void main() {
+                    vNormal = normalize(normalMatrix * normal);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vNormal;
+                uniform float time;
+                uniform float audioData;
+                vec3 hsv2rgb(vec3 c) {
+                    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+                    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+                    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+                }
+                void main() {
+                    float intensity = pow(1.5 - dot(vNormal, vec3(0, 0, 1)), 3.0);
+                    float hue = 0.5 + sin(time * 0.5 + audioData * 2.0) * 0.1;
+                    float saturation = 0.8 + audioData * 0.2;
+                    float value = 1.8 + sin(time * 3.0) * 0.1;
+                    vec3 color = hsv2rgb(vec3(hue, saturation, value)) * intensity;
+                    float alpha = 0.6 + audioData * 0.4;
+                    gl_FragColor = vec4(color * 1.5, alpha); 
+                }
+            `,
+        });
+        let sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+        let light = new THREE.PointLight(0x00ffff, 1.5, 200);
+        light.position.set(3, 3, 10);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x003333));
+        camera.position.z = 4;
+
+        function handleError(err) {
+            console.error(err);
+            document.getElementById('errorMessage').style.display = 'block';
+        }
+
+        let clock = new THREE.Clock();
+        let currentScale = 1.0;
+        let targetScale = 1.0;
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function (stream) {
+                    let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    let analyser = audioContext.createAnalyser();
+                    let source = audioContext.createMediaStreamSource(stream);
+                    source.connect(analyser);
+                    analyser.fftSize = 64;
+                    let dataArray = new Uint8Array(analyser.frequencyBinCount);
+                    function animate() {
+                        requestAnimationFrame(animate);
+                        analyser.getByteFrequencyData(dataArray);
+                        let avgFrequency = dataArray.reduce((a, b) => a + b) / dataArray.length;
+                        let normalizedIntensity = Math.min(avgFrequency / 255, 1.0);
+                        targetScale = 1.0 + normalizedIntensity * 2.0;
+                        currentScale += (targetScale - currentScale) * 0.1;
+                        sphere.scale.set(currentScale, currentScale, currentScale);
+                        material.uniforms.time.value = clock.getElapsedTime();
+                        material.uniforms.audioData.value = normalizedIntensity;
+                        sphere.rotation.x += 0.003;
+                        sphere.rotation.y += 0.003;
+                        renderer.render(scene, camera);
+                    }
+                    animate();
+                })
+                .catch(handleError);
+        } else {
+            handleError("getUserMedia not supported");
+        }
+
+        window.addEventListener('resize', function () {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Fetch and display JSON data
+        async function fetchAndDisplayJSON() {
+            try {
+                // Fetch data from ChatLog.json
+                const response = await fetch('../Data/ChatLog.json');
+                if (!response.ok) {
+                    throw new Error(`Failed to load JSON: ${response.status} ${response.statusText}`);
+                }
+                const jsonData = await response.json();
+                // Get the last 5 conversations
+                const last5Conversations = jsonData.slice(-5);
+                // Display the last 5 conversations
+                const conversationList = document.getElementById('conversationList');
+                conversationList.innerHTML = ''; // Clear previous content
+                last5Conversations.forEach((conversation) => {
+                    const listItem = document.createElement('li');
+                    if (conversation.role === "user") {
+                        listItem.innerHTML = `<span class="user-content">${conversation.content}</span>`;
+                    } else if (conversation.role === "assistant") {
+                        listItem.innerHTML = `<span class="assistant-content">${conversation.content}</span>`;
+                    }
+                    conversationList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Error fetching or processing JSON:', error);
+            }
+        }
+
+        // Call the function to fetch and display JSON every 2 seconds
+        setInterval(fetchAndDisplayJSON, 2000);
+    </script>
+</body>
+</html>

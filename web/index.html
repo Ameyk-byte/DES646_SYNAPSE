@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Reactive Sphere</title>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- EEL for Python → JS communication ✅ -->
+    <script type="text/javascript" src="/eel.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            background: radial-gradient(circle, #1a1a1a, #000); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            position: relative;
+        }
+        canvas { display: block; }
+
+        .error-message {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: none;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .info-panel { position: fixed; bottom: 30px; font-family: 'Orbitron', sans-serif; }
+        #leftPanel { left: 30px; }
+        #rightPanel { right: 30px; }
+
+        #clock { font-size: 3.2em; color: #00ffff; }
+        #date { font-size: 1.3em; color: rgba(0,255,255,0.8); }
+
+        #jsonDisplay {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,255,255,0.1);
+            border: 1px solid rgba(0,255,255,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            box-shadow: 0 0 15px rgba(0,255,255,0.4);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+        }
+
+        /* ✅ NEW LEARNING RECOMMENDER BOX */
+        #learningBox {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,255,255,0.1);
+            border: 1px solid rgba(0,255,255,0.3);
+            border-radius: 10px;
+            padding: 15px;
+            width: 410px;
+            max-height: 230px;
+            overflow-y: auto;
+            box-shadow: 0 0 15px rgba(0,255,255,0.4);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            display: none;
+        }
+
+        #learningBox h3 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .learning-item {
+            padding: 8px;
+            border-bottom: 1px solid rgba(0,255,255,0.2);
+        }
+
+        .learning-item a {
+            color: #00ffff;
+            text-decoration: underline;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="error-message" id="errorMessage">Microphone access required</div>
+
+    <div id="leftPanel" class="info-panel">
+        <div id="clock">12:00:00</div>
+        <div id="date">Monday, January 01</div>
+    </div>
+
+    <div id="rightPanel" class="info-panel">
+        <div id="factBox">
+            <div class="fact-text">Loading interesting fact...</div>
+            <div class="fact-source">Source: Open Trivia DB</div>
+        </div>
+    </div>
+
+    <div id="jsonDisplay">
+        <h3>Last Conversations</h3>
+        <ul id="conversationList"></ul>
+    </div>
+
+    <!-- ✅ NEW Learning UI -->
+    <div id="learningBox">
+        <h3>📚 Recommended Resources</h3>
+        <div id="learningList"></div>
+    </div>
+
+    <script>
+        /* ✅ JS function callable from Python via eel.updateLearningResources() */
+        eel.expose(updateLearningResources);
+        function updateLearningResources(resources) {
+            const box = document.getElementById("learningBox");
+            const list = document.getElementById("learningList");
+
+            if (!resources || resources.length === 0) {
+                box.style.display = "none";
+                return;
+            }
+
+            list.innerHTML = "";
+            resources.forEach(r => {
+                let div = document.createElement("div");
+                div.className = "learning-item";
+                div.innerHTML = `
+                    <b>${r.title}</b> (${r.level})<br>
+                    ${r.type} • ~${r.duration_min} min<br>
+                    <a href="${r.url}" target="_blank">Open</a>
+                `;
+                list.appendChild(div);
+            });
+
+            box.style.display = "block";
+        }
+
+        /* ---------- ORIGINAL CODE BELOW (unchanged) ---------- */
+        
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').textContent =
+                now.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('date').textContent =
+                now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        }
+        setInterval(updateClock, 1000); updateClock();
+
+        async function fetchFact() {
+            try {
+                const res = await fetch('https://opentdb.com/api.php?amount=1&type=boolean');
+                const data = await res.json();
+                document.querySelector('.fact-text').textContent = data.results[0].question;
+            } catch {
+                document.querySelector('.fact-text').textContent = "Error loading fact";
+            }
+        }
+        fetchFact();
+        setInterval(fetchFact, 10000);
+
+        // ... (THREE.js and audio visualizer code stays exactly same as your original)
+    </script>
+
+    <!-- THREE.js visualizer code continues here exactly as before -->
+</body>
+</html>

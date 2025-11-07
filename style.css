@@ -1,0 +1,99 @@
+/* styles.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(circle, #1e1e2f, #0a0a14);
+  font-family: 'Arial', sans-serif;
+  color: white;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+}
+
+canvas {
+  display: block;
+  width: 60%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(0, 123, 255, 0.5), inset 0 0 20px rgba(0, 123, 255, 0.3);
+}
+
+#micButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background: #007bff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#micButton:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Learning Recommendation Panel */
+#learningBox {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 123, 255, 0.15);
+  border: 1px solid rgba(0,123,255,0.4);
+  border-radius: 12px;
+  padding: 18px;
+  width: 410px;
+  max-height: 240px;
+  overflow-y: auto;
+  box-shadow: 0 0 18px rgba(0,123,255,0.5);
+  color: #bde6ff;
+  display: none; /* hidden until resources arrive */
+  backdrop-filter: blur(6px);
+}
+
+#learningBox h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.learning-item {
+  padding: 8px 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  font-size: 14px;
+}
+
+.learning-item:last-child {
+  border-bottom: none;
+}
+
+.learning-item b {
+  color: #ffffff;
+}
+
+.learning-item a {
+  color: #6bc7ff;
+  text-decoration: underline;
+  font-size: 0.9em;
+}
+
+.learning-item a:hover {
+  color: #ffffff;
+}

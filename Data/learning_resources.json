@@ -1,0 +1,450 @@
+[
+  {
+    "id": "py101",
+    "title": "Python for Beginners – Full Course",
+    "topic": "python",
+    "type": "video",
+    "level": "beginner",
+    "duration_min": 240,
+    "tags": ["python", "programming", "basics"],
+    "url": "https://www.youtube.com/watch?v=rfscVS0vtbw"
+  },
+  {
+    "id": "py102",
+    "title": "Python Crash Course (Free Book)",
+    "topic": "python",
+    "type": "book",
+    "level": "beginner",
+    "duration_min": 600,
+    "tags": ["python", "book", "learning"],
+    "url": "https://automatetheboringstuff.com/"
+  },
+  {
+    "id": "py103",
+    "title": "Learn Python – CodeAcademy",
+    "topic": "python",
+    "type": "course",
+    "level": "beginner",
+    "duration_min": 480,
+    "tags": ["python", "syntax"],
+    "url": "https://www.codecademy.com/learn/learn-python-3"
+  },
+  {
+    "id": "py104",
+    "title": "Intermediate Python Tutorial – Real Python",
+    "topic": "python",
+    "type": "article",
+    "level": "intermediate",
+    "duration_min": 60,
+    "tags": ["python", "oop", "functions"],
+    "url": "https://realpython.com/"
+  },
+  {
+    "id": "py105",
+    "title": "Python Exercises – W3Schools",
+    "topic": "python",
+    "type": "exercise",
+    "level": "beginner",
+    "duration_min": 120,
+    "tags": ["practice", "basics"],
+    "url": "https://www.w3schools.com/python/python_exercises.asp"
+  },
+
+  {
+    "id": "ml201",
+    "title": "Machine Learning Crash Course – Google",
+    "topic": "machine learning",
+    "type": "course",
+    "level": "beginner",
+    "duration_min": 480,
+    "tags": ["ml", "google", "supervised"],
+    "url": "https://developers.google.com/machine-learning/crash-course"
+  },
+  {
+    "id": "ml202",
+    "title": "Andrew Ng – Machine Learning",
+    "topic": "machine learning",
+    "type": "course",
+    "level": "intermediate",
+    "duration_min": 3000,
+    "tags": ["ml", "coursera"],
+    "url": "https://www.coursera.org/learn/machine-learning"
+  },
+  {
+    "id": "ml203",
+    "title": "Kaggle Intro to Machine Learning",
+    "topic": "machine learning",
+    "type": "course",
+    "level": "beginner",
+    "duration_min": 180,
+    "tags": ["models", "training"],
+    "url": "https://www.kaggle.com/learn/intro-to-machine-learning"
+  },
+  {
+    "id": "ml204",
+    "title": "Scikit-Learn Guide",
+    "topic": "machine learning",
+    "type": "article",
+    "level": "intermediate",
+    "duration_min": 120,
+    "tags": ["sklearn", "python"],
+    "url": "https://scikit-learn.org/stable/tutorial/"
+  },
+  {
+    "id": "ml205",
+    "title": "ML Cheatsheet",
+    "topic": "machine learning",
+    "type": "article",
+    "level": "beginner",
+    "duration_min": 30,
+    "tags": ["quick guide"],
+    "url": "https://ml-cheatsheet.readthedocs.io/"
+  },
+
+  {
+    "id": "dl301",
+    "title": "Deep Learning with PyTorch",
+    "topic": "deep learning",
+    "type": "course",
+    "level": "intermediate",
+    "duration_min": 1200,
+    "tags": ["neural networks", "pytorch"],
+    "url": "https://www.udacity.com/course/deep-learning-pytorch--ud188"
+  },
+  {
+    "id": "dl302",
+    "title": "Neural Networks from Scratch",
+    "topic": "deep learning",
+    "type": "video",
+    "level": "beginner",
+    "duration_min": 300,
+    "tags": ["neural networks"],
+    "url": "https://www.youtube.com/watch?v=aircAruvnKk"
+  },
+  {
+    "id": "dl303",
+    "title": "Fast.ai Practical Deep Learning",
+    "topic": "deep learning",
+    "type": "course",
+    "level": "intermediate",
+    "duration_min": 1800,
+    "tags": ["pytorch", "vision"],
+    "url": "https://course.fast.ai/"
+  },
+  {
+    "id": "dl304",
+    "title": "Stanford CS231n – CNNs",
+    "topic": "deep learning",
+    "type": "course",
+    "level": "advanced",
+    "duration_min": 2400,
+    "tags": ["cnn", "vision"],
+    "url": "http://cs231n.stanford.edu/"
+  },
+  {
+    "id": "dl305",
+    "title": "Deep Learning Paper Reading",
+    "topic": "deep learning",
+    "type": "article",
+    "level": "advanced",
+    "duration_min": 60,
+    "tags": ["research"],
+    "url": "https://arxiv.org/list/cs.LG/recent"
+  },
+
+  {
+    "id": "ds401",
+    "title": "Data Science for Beginners",
+    "topic": "data science",
+    "type": "video",
+    "level": "beginner",
+    "duration_min": 210,
+    "tags": ["data", "python"],
+    "url": "https://www.youtube.com/watch?v=ua-CiDNNj30"
+  },
+  {
+    "id": "ds402",
+    "title": "Statistics for Data Science",
+    "topic": "data science",
+    "type": "course",
+    "level": "beginner",
+    "duration_min": 600,
+    "tags": ["statistics", "math"],
+    "url": "https://www.udemy.com/course/statistics-for-data-science/"
+  },
+  {
+    "id": "ds403",
+    "title": "Pandas Official Tutorial",
+    "topic": "data science",
+    "type": "article",
+    "level": "intermediate",
+    "duration_min": 90,
+    "tags": ["pandas", "python", "data"],
+    "url": "https://pandas.pydata.org/docs/user_guide/index.html"
+  },
+  {
+    "id": "ds404",
+    "title": "Kaggle Intro to SQL",
+    "topic": "data science",
+    "type": "course",
+    "level": "beginner",
+    "duration_min": 120,
+    "tags": ["sql", "database"],
+    "url": "https://www.kaggle.com/learn/intro-to-sql"
+  },
+  {
+    "id": "ds405",
+    "title": "Seaborn Visualization Guide",
+    "topic": "data science",
+    "type": "article",
+    "level": "intermediate",
+    "duration_min": 120,
+    "tags": ["visualization"],
+    "url": "https://seaborn.pydata.org/"
+  },
+
+  {
+    "id": "bio101",
+    "title": "Introduction to Bioinformatics",
+    "topic": "bioinformatics",
+    "type": "course",
+    "level": "beginner",
+    "duration_min": 900,
+    "tags": ["biology", "bioinformatics"],
+    "url": "https://www.edx.org/course/introduction-to-bioinformatics"
+  },
+  {
+    "id": "bio102",
+    "title": "NCBI Bioinformatics Guide",
+    "topic": "bioinformatics",
+    "type": "article",
+    "level": "intermediate",
+    "duration_min": 120,
+    "tags": ["ncbi", "genomics"],
+    "url": "https://www.ncbi.nlm.nih.gov/guide/"
+  },
+  {
+    "id": "bio103",
+    "title": "Coursera – Genomic Data Science",
+    "topic": "bioinformatics",
+    "type": "course",
+    "level": "intermediate",
+    "duration_min": 1800,
+    "tags": ["genomics", "sequencing"],
+    "url": "https://www.coursera.org/specializations/genomic-data-science"
+  },
+  {
+    "id": "bio104",
+    "title": "Biopython Tutorial",
+    "topic": "bioinformatics",
+    "type": "article",
+    "level": "intermediate",
+    "duration_min": 120,
+    "tags": ["biopython"],
+    "url": "https://biopython.org/wiki/Documentation"
+  },
+  {
+    "id": "bio105",
+    "title": "Bioinformatics Exercises",
+    "topic": "bioinformatics",
+    "type": "exercise",
+    "level": "beginner",
+    "duration_min": 180,
+    "tags": ["practice"],
+    "url": "https://rosalind.info/problems/locations/"
+  },
+
+  {
+    "id": "scanpy101",
+    "title": "Scanpy: Single-Cell Tutorial",
+    "topic": "scanpy",
+    "type": "article",
+    "level": "beginner",
+    "duration_min": 60,
+    "tags": ["python", "bioinformatics"],
+    "url": "https://scanpy.readthedocs.io/en/stable/tutorials.html"
+  },
+  {
+    "id": "scanpy102",
+    "title": "Single Cell RNA-seq – Complete Guide",
+    "topic": "scanpy",
+    "type": "article",
+    "level": "intermediate",
+    "duration_min": 120,
+    "tags": ["rna-seq", "biology"],
+    "url": "https://satijalab.org/seurat/"
+  },
+  {
+    "id": "scanpy103",
+    "title": "Scanpy + Seurat Comparison",
+    "topic": "scanpy",
+    "type": "article",
+    "level": "intermediate",
+    "duration_min": 60,
+    "tags": ["anndata", "umap"],
+    "url": "https://singlecelltutorials.com/"
+  },
+  {
+    "id": "scanpy104",
+    "title": "Single-Cell Data Visualization",
+    "topic": "scanpy",
+    "type": "video",
+    "level": "beginner",
+    "duration_min": 45,
+    "tags": ["scanpy", "umap"],
+    "url": "https://www.youtube.com/results?search_query=scanpy+tutorial"
+  },
+  {
+    "id": "scanpy105",
+    "title": "Single-Cell Analysis Exercises",
+    "topic": "scanpy",
+    "type": "exercise",
+    "level": "intermediate",
+    "duration_min": 120,
+    "tags": ["notebooks"],
+    "url": "https://nbis.se/training/workshops/"
+  },
+
+  {
+    "id": "web501",
+    "title": "HTML & CSS Full Course",
+    "topic": "web development",
+    "type": "video",
+    "level": "beginner",
+    "duration_min": 300,
+    "tags": ["html", "css"],
+    "url": "https://www.youtube.com/watch?v=G3e-cpL7ofc"
+  },
+  {
+    "id": "web502",
+    "title": "JavaScript Crash Course",
+    "topic": "web development",
+    "type": "video",
+    "level": "beginner",
+    "duration_min": 180,
+    "tags": ["js", "frontend"],
+    "url": "https://www.youtube.com/watch?v=PkZNo7MFNFg"
+  },
+  {
+    "id": "web503",
+    "title": "React for Beginners",
+    "topic": "web development",
+    "type": "course",
+    "level": "intermediate",
+    "duration_min": 900,
+    "tags": ["react", "frontend"],
+    "url": "https://scrimba.com/learn/react"
+  },
+  {
+    "id": "web504",
+    "title": "Node.js Tutorial",
+    "topic": "web development",
+    "type": "video",
+    "level": "intermediate",
+    "duration_min": 240,
+    "tags": ["node", "backend"],
+    "url": "https://www.youtube.com/watch?v=TlB_eWDSMt4"
+  },
+  {
+    "id": "web505",
+    "title": "Build a Full Stack App",
+    "topic": "web development",
+    "type": "course",
+    "level": "intermediate",
+    "duration_min": 1500,
+    "tags": ["mern", "fullstack"],
+    "url": "https://www.udemy.com/course/mern-stack-course/"
+  },
+
+  {
+    "id": "db601",
+    "title": "Intro to SQL – Khan Academy",
+    "topic": "database",
+    "type": "course",
+    "level": "beginner",
+    "duration_min": 300,
+    "tags": ["sql", "database"],
+    "url": "https://www.khanacademy.org/computing/computer-programming/sql"
+  },
+  {
+    "id": "db602",
+    "title": "MySQL Bootcamp",
+    "topic": "database",
+    "type": "course",
+    "level": "intermediate",
+    "duration_min": 2400,
+    "tags": ["mysql"],
+    "url": "https://www.udemy.com/course/the-complete-sql-bootcamp/"
+  },
+  {
+    "id": "db603",
+    "title": "PostgreSQL Full Guide",
+    "topic": "database",
+    "type": "article",
+    "level": "intermediate",
+    "duration_min": 180,
+    "tags": ["postgres"],
+    "url": "https://www.postgresqltutorial.com/"
+  },
+  {
+    "id": "db604",
+    "title": "MongoDB Basics",
+    "topic": "database",
+    "type": "course",
+    "level": "intermediate",
+    "duration_min": 600,
+    "tags": ["nosql"],
+    "url": "https://learn.mongodb.com/"
+  },
+
+  {
+    "id": "cloud701",
+    "title": "AWS Cloud Practitioner",
+    "topic": "cloud",
+    "type": "course",
+    "level": "beginner",
+    "duration_min": 1800,
+    "tags": ["aws"],
+    "url": "https://www.aws.training/"
+  },
+  {
+    "id": "cloud702",
+    "title": "Docker for Beginners",
+    "topic": "cloud",
+    "type": "video",
+    "level": "intermediate",
+    "duration_min": 120,
+    "tags": ["containers", "devops"],
+    "url": "https://www.youtube.com/watch?v=pTFZFxd4hOI"
+  },
+  {
+    "id": "cloud703",
+    "title": "Kubernetes 101",
+    "topic": "cloud",
+    "type": "course",
+    "level": "intermediate",
+    "duration_min": 900,
+    "tags": ["k8s", "clusters"],
+    "url": "https://www.udemy.com/course/kubernetes-for-beginners/"
+  },
+  {
+    "id": "cloud704",
+    "title": "Git & GitHub Full Course",
+    "topic": "devops",
+    "type": "video",
+    "level": "beginner",
+    "duration_min": 200,
+    "tags": ["git"],
+    "url": "https://www.youtube.com/watch?v=RGOj5yH7evk"
+  },
+  {
+    "id": "cloud705",
+    "title": "CI/CD Basics",
+    "topic": "devops",
+    "type": "article",
+    "level": "beginner",
+    "duration_min": 60,
+    "tags": ["ci", "cd", "automation"],
+    "url": "https://www.atlassian.com/continuous-delivery"
+  }
+]
