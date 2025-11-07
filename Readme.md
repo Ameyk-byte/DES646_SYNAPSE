@@ -46,6 +46,13 @@ Personalized Learning Recommender.
 ```bash
 git clone https://github.com/Ameyk-byte/DES646.git
 cd DES646
+
+cd ~/Downloads/DES646-main
+source venv/bin/activate
+python3.10 -m venv venv
+pip install -r Requirements.txt
+python Main.py
+
 ```
 
 ### Hotkey Activation
@@ -55,6 +62,7 @@ After launching Neuro:
 - Speak: "Neuro recommend resources for python"
 
 No wake word required, no clicking buttons.
+
 
 
 
