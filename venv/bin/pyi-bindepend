@@ -1,4 +1,4 @@
-#!/Users/ameykhandwala/Downloads/DES646-main/venv/bin/python3
+#!/Users/ameykhandwala/Downloads/DES646-main/venv/bin/python3.10
 import sys
 from PyInstaller.utils.cliutils.bindepend import run
 if __name__ == '__main__':

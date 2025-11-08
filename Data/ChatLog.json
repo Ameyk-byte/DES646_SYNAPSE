@@ -38,5 +38,29 @@
     {
         "role": "assistant",
         "content": "Assuming you mean CRISPR, it's a powerful gene-editing tool.\nThink of it like a pair of \"molecular scissors\" that can find a specific section of DNA inside a cell. Once it finds the target, it"
+    },
+    {
+        "role": "user",
+        "content": "what is ai"
+    },
+    {
+        "role": "assistant",
+        "content": "Artificial Intelligence is technology that enables machines to perform tasks that normally require human intelligence, like learning and problem-solving."
+    },
+    {
+        "role": "user",
+        "content": "neuro who is APJ Abdul Kalam"
+    },
+    {
+        "role": "assistant",
+        "content": "Hello Amey.\n\nAPJ Abdul Kalam was an Indian aerospace scientist and the 11th President of India. He is widely known as the \"Missile Man of India\" for his work on developing ballistic missile and launch vehicle technology."
+    },
+    {
+        "role": "user",
+        "content": "neuro what is AI"
+    },
+    {
+        "role": "assistant",
+        "content": "Hello Amey.\n\nArtificial Intelligence is the simulation of human intelligence in machines, enabling them to learn, reason, and solve problems."
     }
 ]
