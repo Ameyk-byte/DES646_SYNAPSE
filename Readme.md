@@ -57,11 +57,12 @@ python desktop_app.py
 
 ### Hotkey Activation
 After launching Neuro:
-
+- Press Speak button
 - Press **SHIFT + SPACE**  
 - Speak: "Neuro recommend resources for python"
 
 No wake word required, no clicking buttons.
+
 
 
 
