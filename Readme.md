@@ -51,7 +51,7 @@ cd ~/Downloads/DES646-main
 source venv/bin/activate
 python3.10 -m venv venv
 pip install -r Requirements.txt
-python Main.py
+python desktop_app.py
 
 ```
 
@@ -62,6 +62,7 @@ After launching Neuro:
 - Speak: "Neuro recommend resources for python"
 
 No wake word required, no clicking buttons.
+
 
 
 
